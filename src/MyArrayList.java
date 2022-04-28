@@ -53,7 +53,18 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     public Iterator<T> iterator() {
-        return null;
+        Iterator<T> it = new Iterator<T>() {
+            int index = 0;
+
+            public boolean hasNext() {
+                return index < size();
+            }
+
+            public T next() {
+                return storage[index];
+            }
+        };
+        return it;
     }
 
     public Object[] toArray() {
@@ -110,8 +121,11 @@ public class MyArrayList<T> implements MyList<T> {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public void clear() {
-
+        T[] newStorage = (T[]) new Object[capacity];
+        this.size = 0;
+        this.storage = newStorage;
     }
 
     public void add(int index, T element) {
