@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.Iterator;
 
 public class MyArrayList<T> implements MyList<T> {
@@ -67,12 +66,13 @@ public class MyArrayList<T> implements MyList<T> {
         return it;
     }
 
+    @SuppressWarnings("unchecked")
     public Object[] toArray() {
-        return new Object[0];
-    }
-
-    public <T1> T1[] toArray(T1[] a) {
-        return null;
+        T[] newArr = (T[]) new Object[size()];
+        for (int i = 0; i < newArr.length; i++) {
+            newArr[i] = storage[i];
+        }
+        return newArr;
     }
 
     public boolean add(T t) {
@@ -105,26 +105,10 @@ public class MyArrayList<T> implements MyList<T> {
         return data;
     }
 
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
     @SuppressWarnings("unchecked")
     public void clear() {
         T[] newStorage = (T[]) new Object[capacity];
-        this.size = 0;
+        size = 0;
         this.storage = newStorage;
     }
 
