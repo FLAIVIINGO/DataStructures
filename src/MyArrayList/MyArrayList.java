@@ -4,11 +4,40 @@ import MyListInteface.MyList;
 
 import java.util.Iterator;
 
-public class MyArrayList<T> implements MyList<T> {
+/**
+ * This class is an implementation of a dynamic array 
+ * using generic types.
+ *
+ * @param <T> generic type
+ * @author Andrew Babilonia
+ */
+
+public class MyArrayList<T> implements MyList<T>, Iterable<T> {
+    /**
+     * Array of generic types
+     */
 
     private T[] storage;
+  
+    /**
+     * Size variable for array list
+     * User level information
+     */
+
     private int size;
+
+    /**
+     * Actual size of array list, unknown to user
+     */
+
     private int capacity;
+
+    /**
+     * List constructor
+     * Initializes to a specified capacity from user
+     * @param initialCapacity initial capacity of the list
+     * @throws IllegalArgumentException if capacity is negative
+     */
 
     @SuppressWarnings("unchecked")
     public MyArrayList(int initialCapacity) {
@@ -18,21 +47,51 @@ public class MyArrayList<T> implements MyList<T> {
         this.capacity = initialCapacity;
     }
 
+    /**
+     * Default arraylist constructor
+     * Initializes this arraylist to a default
+     * value of 10
+     */
+
     public MyArrayList() {
         this(10);
     }
+
+    /**
+     * Returns the capacity of the list
+     * @return capacity
+     */
 
     public int getCapacity() {
         return this.capacity;
     }
 
+    /**
+     * Returns the number of elements in this list
+     * @return size
+     */
+
     public int size() {
         return this.size;
     }
 
+    /**
+     * Returns true if this arraylist
+     * contains no elements
+     * @return boolean value of T/F
+     */
+
     public boolean isEmpty() {
         return size() == 0;
     }
+
+    /**
+     * Returns the index of the first occurrence of
+     * the specified element in this list or -1
+     * if this list does not contain the element
+     * @param o the object being queried
+     * @return i the index of the queried object
+     */
 
     public int indexOf(Object o) {
         for (int i = 0; i < size(); i++) {
@@ -41,6 +100,14 @@ public class MyArrayList<T> implements MyList<T> {
         }
         return -1;
     }
+
+    /**
+     * Returns the index of the last occurrence of the
+     * specified element in this list, or 01 if this
+     * list does not contain the element
+     * @param o the object in question
+     * @return lastIdx the last occurrence of the element
+     */
 
     public int lastIndexOf(Object o) {
         int lastIdx = -1;
@@ -51,17 +118,42 @@ public class MyArrayList<T> implements MyList<T> {
         return lastIdx;
     }
 
+    /**
+     * Returns true if this list contains the
+     * specified element
+     * @param o the object being queried
+     * @return T/F boolean value
+     */
+
     public boolean contains(Object o) {
         return indexOf(o) != -1;
     }
+
+    /**
+     * Returns an iterator over the elements in this
+     * list in proper sequence
+     * @param T generic type
+     * @return iterator
+     */
 
     public Iterator<T> iterator() {
         Iterator<T> it = new Iterator<T>() {
             int index = 0;
 
+            /**
+             * Returns true if the iteration has more
+             * elements
+             * @return T/F boolean value
+             */
+
             public boolean hasNext() {
                 return index < size();
             }
+
+            /**
+             * Returns the next element in the iteration
+             * @return element
+             */
 
             public T next() {
                 return storage[index];
@@ -69,6 +161,13 @@ public class MyArrayList<T> implements MyList<T> {
         };
         return it;
     }
+
+    /**
+     * Returns an array containing all of the elements in
+     * this list in proper sequence; the runtime type of the 
+     * returned array is that of the specified array
+     * @return type defined array
+     */
 
     @SuppressWarnings("unchecked")
     public Object[] toArray() {
@@ -79,11 +178,26 @@ public class MyArrayList<T> implements MyList<T> {
         return newArr;
     }
 
+    /**
+     * Appends the specified element to the end
+     * of this list
+     * @param t the element
+     * @return boolean value of true
+     */
+
     public boolean add(T t) {
         ensureCapacity(size() + 1);
         this.storage[size++] = t;
         return true;
     }
+
+    /**
+     * Removes the first occurrence of the specified
+     * element from this list, if it is present
+     * @param o the object to be removed
+     * @return boolean T/F if the item was removed
+     * in the list
+     */
 
     public boolean remove(Object o) {
         int index = indexOf(o);
@@ -92,6 +206,14 @@ public class MyArrayList<T> implements MyList<T> {
         removeAt(index);
         return true;
     }
+
+    /**
+     * Removes the element at the specified position in
+     * this list
+     * @param index
+     * @return the element that was previously
+     * in the specified index of this list
+     */
 
     @SuppressWarnings("unchecked")
     public T removeAt(int index) {
@@ -109,12 +231,23 @@ public class MyArrayList<T> implements MyList<T> {
         return data;
     }
 
+    /**
+     * Removes all of the elements from this list
+     */
+
     @SuppressWarnings("unchecked")
     public void clear() {
         T[] newStorage = (T[]) new Object[capacity];
         size = 0;
         this.storage = newStorage;
     }
+
+    /**
+     * Inserts the specified element at the specified
+     * position in this list
+     * @param index
+     * @param element
+     */
 
     public void add(int index, T element) {
         if (index < 0 || index >= size()) throw new IndexOutOfBoundsException();
@@ -126,10 +259,26 @@ public class MyArrayList<T> implements MyList<T> {
         this.size++;
     }
 
+    /**
+     * Returns the element at the specified position
+     * in this list
+     * @param index
+     * @return the element at the specified position
+     */
+
     public T get(int index) {
         if (index < 0 || index >= size()) throw new IndexOutOfBoundsException();
         return this.storage[index];
     }
+
+    /**
+     * Replaces the element at the specified position
+     * in this list with the specified element
+     * @param index
+     * @param element
+     * @return the element that was previously held
+     * at the specified position
+     */
 
     public T set(int index, T element) {
         if (index < 0 || index >= size()) throw new IndexOutOfBoundsException();
@@ -137,6 +286,11 @@ public class MyArrayList<T> implements MyList<T> {
         this.storage[index] = element;
         return data;
     }
+
+    /**
+     * Trims the capacity of this ArrayList instance
+     * to be the list's current size
+     */
 
     @SuppressWarnings("unchecked")
     public void trimToSize() {
@@ -147,6 +301,14 @@ public class MyArrayList<T> implements MyList<T> {
         this.capacity = size();
         this.storage = newStorage;
     }
+
+    /**
+     * Increases the capacity of this ArrayList instance,
+     * if necessary, to ensure that it can hold at least
+     * the number of elements specified by the minimum
+     * capacity argument
+     * @param minCapacity
+     */
 
     @SuppressWarnings("unchecked")
     public void ensureCapacity(int minCapacity) {
@@ -161,6 +323,11 @@ public class MyArrayList<T> implements MyList<T> {
             this.storage = newStorage;
         }
     }
+
+    /**
+     * Returns a string representation of the object
+     * @return string representation
+     */
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
