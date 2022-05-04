@@ -188,12 +188,89 @@ public class MySingleLinkedList<T> implements MyList<T> {
         return getLast();
     }
 
+    public T poll() {
+        if (size() == 0) return null;
+        T data = head.data;
+        head = head.next;
+        size--;
+
+        return data;
+    }
+
+    public T pollFirst() {
+
+        return poll();
+    }
+
+    public T pollLast() {
+        if (size() == 0) return null;
+        ListNode<T> temp = head;
+        while (temp.next != null)
+            temp = temp.next;
+        size--;
+        return temp.data;
+    }
+
+    public T pop() {
+        if (size() == 0) throw new NoSuchElementException();
+        T data = head.data;
+        head = head.next;
+        size--;
+        return data;
+    }
+
+    public void push(T t) {
+        addFirst(t);
+    }
+
+    public T remove() {
+        return pop();
+    }
+
     public T removeAt(int index) {
+        if (index < 0 || index >= size()) throw new IndexOutOfBoundsException();
+        if (index == 0)
+            return pop();
+        if (index == size() - 1)
+            return removeLast();
+
         return null;
     }
 
     public boolean remove(Object o) {
         return false;
+    }
+
+    public T removeFirst() {
+        return pop();
+    }
+
+    public boolean removeFirstOccurrence(Object o) {
+        return false;
+    }
+
+    public T removeLast() {
+        if (size() == 0) throw new NoSuchElementException();
+        if (size() == 1) return removeFirst();
+        T data;
+        ListNode<T> temp = head.next;
+        ListNode<T> prev = head;
+        while (temp.next != null) {
+            temp = temp.next;
+            prev = prev.next;
+        }
+        data = temp.data;
+        prev.next = null;
+
+        return data;
+    }
+
+    public boolean removeLastOccurrence(Object o) {
+        return false;
+    }
+
+    public Object[] toArray() {
+        return null;
     }
 
     public T set(int index, T element) {
