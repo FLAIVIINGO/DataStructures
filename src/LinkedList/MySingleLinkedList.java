@@ -233,8 +233,18 @@ public class MySingleLinkedList<T> implements MyList<T> {
             return pop();
         if (index == size() - 1)
             return removeLast();
+        ListNode<T> curr = head.next;
+        ListNode<T> prev = head;
+        int i = 1;
+        while (i < index) {
+            i++;
+            prev = curr;
+            curr = curr.next;
+        }
+        T data = curr.data;
+        prev.next = curr.next;
 
-        return null;
+        return data;
     }
 
     public boolean remove(Object o) {
@@ -303,10 +313,13 @@ public class MySingleLinkedList<T> implements MyList<T> {
         s_list.add(5);
         s_list.add(2, null);
         System.out.println(s_list.size());
-        System.out.println(s_list.toString());
         System.out.println(s_list.get(0));
         System.out.println(s_list.indexOf(11));
         System.out.println(s_list.contains(null));
         System.out.println(s_list.lastIndexOf(5));
+        System.out.println(s_list.toString());
+
+        s_list.removeAt(1);
+        System.out.println(s_list.toString());
     }
 }

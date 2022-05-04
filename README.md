@@ -11,7 +11,7 @@ rootFolder>cd bin
 java -cp .;../junit-4.11.jar MyArrayListTest
 ```
 
-#ArrayList Implementation
+# ArrayList Implementation
 The MyArrayList class is a resizable array, which is located in the java.util
 package. This implementation displays some of the most popular methods and
 implements a custom List interface. 
