@@ -4,18 +4,15 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello");
-        MyArrayList<Integer> list1 = new MyArrayList<Integer>(4);
-        list1.add(5);
-        list1.add(10);
-        list1.add(30);
-        list1.add(1);
-        list1.add(3);
-        MyArrayList<Integer> list2 = new MyArrayList<Integer>(4);
-        list2.add(5);
-        list2.add(10);
-        list2.add(30);
-        list2.add(1);
-        list2.add(3);
-        System.out.println(list2.toString());
+
+        MyArrayList<Character> list1 = new MyArrayList<>();
+        list1.add('b');
+        list1.add('c');
+        list1.add('d');
+        list1.add(null);
+
+        System.out.println(list1.remove('b'));
+        System.out.println(list1.remove('b'));
+        System.out.println(list1.remove(null));
     }
 }

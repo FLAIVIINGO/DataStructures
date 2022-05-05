@@ -1,0 +1,5 @@
+C:\Users\Andrew\GitHub\DataStructures\src\Interfaces\MyList.java
+C:\Users\Andrew\GitHub\DataStructures\src\LinkedList\MySingleLinkedList.java
+C:\Users\Andrew\GitHub\DataStructures\src\Main\Main.java
+C:\Users\Andrew\GitHub\DataStructures\src\MyArrayList\MyArrayList.java
+C:\Users\Andrew\GitHub\DataStructures\src\Test\MyArrayListTest.java
