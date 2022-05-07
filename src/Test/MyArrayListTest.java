@@ -142,11 +142,100 @@ public class MyArrayListTest {
         remove = list.remove('b');
         assertFalse(remove);
 
+        remove = list.remove('r');
+        assertTrue(remove);
+
+        remove = list.remove('r');
+        assertFalse(remove);
+
         remove = list.remove(null);
         assertTrue(remove);
 
         remove = list.remove(null);
         assertFalse(remove);
+    }
+
+    @Test(timeout=2000)
+    public void testContains() {
+        // scenario -- test contains functionality
+        MyArrayList<Integer> list = new MyArrayList<>();
+        int[] elements = {1,55,44,678,4};
+        for(int i = 0; i < elements.length; i++) {
+            list.add(elements[i]);
+        }
+        boolean contain = list.contains(1);
+        assertTrue(contain);
+
+        contain = list.contains(55);
+        assertTrue(contain);
+
+        contain = list.contains(4);
+        assertTrue(contain);
+
+        contain = list.contains(99);
+        assertFalse(contain);
+    }
+
+    @Test(timeout=2000)
+    public void testEnsureCapacity() {
+        // scenario -- check that the capacity is doubling
+        MyArrayList<Integer> list = new MyArrayList<>(4);
+        int[] elements = {1,2,3,4};
+        for(int i = 0; i < elements.length; i++)
+          list.add(elements[i]);
+        list.add(5);
+        int capacity = list.getCapacity();
+        assertEquals(8, capacity);
+    }
+
+    @Test(timeout=2000)
+    public void testTrimToSize() {
+        // scenario -- trim to size array
+        MyArrayList<Integer> list = new MyArrayList<>(4);
+        int[] elements = {1,2,3,4};
+        for(int i = 0; i < elements.length; i++)
+          list.add(elements[i]);
+        list.add(5);
+        list.trimToSize();
+        int capacity = list.getCapacity();
+        assertEquals(5, capacity);
+
+    }
+
+    @Test(timeout=2000)
+    public void testGet1() {
+      // scenario -- test a successful get
+      MyArrayList<Integer> list = new MyArrayList<>();
+      int[] elements = {1,2,3,4,5,6};
+      for(int i = 0; i < elements.length; i++) {
+          list.add(elements[i]);
+      }
+      int result = list.get(2);
+      assertEquals(3, result);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testGet2() {
+        // scenario -- get index out of bounds
+      MyArrayList<Integer> list = new MyArrayList<>();
+      int[] elements = {1,2,3,4,5,6};
+      for(int i = 0; i < elements.length; i++) {
+          list.add(elements[i]);
+      }
+      int result = list.get(6); 
+    }
+
+    @Test(timeout=2000)
+    public void testSet1() {
+        // scenario -- successful set method
+        MyArrayList<String> list = new MyArrayList<>();
+        String[] elements = {"a","b","d","r",null}; 
+        for(int i = 0; i < elements.length; i++) {
+            list.add(elements[i]);
+        }
+        String data = list.set(0, "z");
+        assertEquals("z", list.get(0));
+        assertEquals("a", data);
     }
 
     // run the tests

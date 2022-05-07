@@ -94,9 +94,17 @@ public class MyArrayList<T> implements MyList<T>, Iterable<T> {
      */
 
     public int indexOf(Object o) {
-        for (int i = 0; i < size(); i++) {
-            if (this.storage[i].equals(o))
-                return i;
+        if(o == null) {
+            for(int i = 0; i < size(); i++) {
+                if(this.storage[i] == null)
+                    return i;
+            }
+        }
+        else {
+            for (int i = 0; i < size(); i++) {
+                if (this.storage[i] != null && this.storage[i].equals(o))
+                    return i;
+            }
         }
         return -1;
     }
